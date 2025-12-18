@@ -1,5 +1,6 @@
 import type { NormalizedSearchResult } from '../../types/city.types'
 import styles from './CitySearch.module.css'
+import { CitySearchResultItem } from './CitySearchResultItem'
 
 type Props = {
   query: string
@@ -7,6 +8,7 @@ type Props = {
   isLoading: boolean
   isError: boolean
   errorMessage?: string
+  onAddCity?: (city: NormalizedSearchResult) => void
 }
 
 export const CitySearchResults = ({
@@ -15,6 +17,7 @@ export const CitySearchResults = ({
   isLoading,
   isError,
   errorMessage,
+  onAddCity,
 }: Props) => {
   const trimmed = query.trim()
 
@@ -41,10 +44,7 @@ export const CitySearchResults = ({
   return (
     <ul className={styles.citySearch__results}>
       {results.map((city) => (
-        <li key={city.placeId} className={styles['citySearch__result-item']}>
-          <div className={styles['citySearch__result-title']}>{city.cityName}</div>
-      
-        </li>
+        <CitySearchResultItem key={city.placeId} city={city} onAdd={onAddCity} />
       ))}
     </ul>
   )
