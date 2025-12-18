@@ -5,11 +5,10 @@ import { useCitySearch } from '../../hooks/useCitySearch'
 import { ApiError } from '../../services/cityService'
 import type { NormalizedCitySearchResult } from '../../types/city.types'
 import styles from './CitySearch.module.css'
-import { CitySearchResults } from './CitySearchResults'
+import CitySearchResults from './CitySearchResults'
 
 const MIN_QUERY_LENGTH = 2
-
-export const CitySearch = () => {
+const CitySearch = () => {
   const [query, setQuery] = useState('')
   const [lastAddedCity, setLastAddedCity] = useState<string | null>(null)
   
@@ -85,7 +84,6 @@ export const CitySearch = () => {
             value={query}
             autoComplete="off"
             onChange={(event) => setQuery(event.target.value)}
-            minLength={MIN_QUERY_LENGTH}
           />
          
         </div>

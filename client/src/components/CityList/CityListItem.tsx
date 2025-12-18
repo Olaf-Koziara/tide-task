@@ -5,7 +5,7 @@ import styles from './CityList.module.css'
 
 type Props = {
   city: City
-  onUpdate: (id: number, name: string, latitude: number, longitude: number) => void
+  onUpdate: (id: number, name: string) => void
   onDelete: (id: number) => void
   isUpdating: boolean
   isDeleting: boolean
@@ -18,7 +18,7 @@ export const CityListItem = ({ city, onUpdate, onDelete, isUpdating, isDeleting 
   const handleSave = () => {
     const trimmed = editValue.trim()
     if (trimmed && trimmed !== city.name) {
-      onUpdate(city.id, trimmed, city.latitude, city.longitude)
+      onUpdate(city.id, trimmed)
     }
     setIsEditing(false)
   }

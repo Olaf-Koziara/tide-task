@@ -1,6 +1,6 @@
 import type { NormalizedCitySearchResult } from '../../types/city.types'
 import styles from './CitySearch.module.css'
-import { CitySearchResultItem } from './CitySearchResultItem'
+import CitySearchResultItem from './CitySearchResultItem'
 
 type Props = {
   query: string
@@ -11,7 +11,7 @@ type Props = {
   onAddCity?: (city: NormalizedCitySearchResult) => void
 }
 
-export const CitySearchResults = ({
+const CitySearchResults = ({
   query,
   results,
   isLoading,

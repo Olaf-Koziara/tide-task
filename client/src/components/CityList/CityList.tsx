@@ -7,8 +7,8 @@ export const CityList = () => {
   const { data: cities, isLoading, isError, error } = useCities()
   const { updateCity, deleteCity } = useCityMutations()
 
-  const handleUpdate = (id: number, name: string, latitude: number, longitude: number) => {
-    updateCity.mutate({ id, data: { name, latitude, longitude } })
+  const handleUpdate = (id: number, name: string) => {
+    updateCity.mutate({ id, data: { name } })
   }
 
   const handleDelete = (id: number) => {
