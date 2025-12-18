@@ -1,5 +1,5 @@
 .citySearch {
-  margin: 2rem auto;
+
   max-width: 720px;
   background: #0f172a;
   color: #e2e8f0;
@@ -92,6 +92,50 @@
 .citySearch__error {
   color: #f87171;
   margin: 0.5rem 0 0;
+}
+
+.citySearch__addError {
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  color: #fca5a5;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+  animation: slideIn 0.2s ease-out;
+}
+
+.citySearch__addSuccess {
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  color: #6ee7b7;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+  animation: slideIn 0.2s ease-out;
+}
+
+.citySearch__addLoading {
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  color: #7dd3fc;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+  animation: slideIn 0.2s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .citySearch__results {
