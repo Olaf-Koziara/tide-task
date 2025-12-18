@@ -1,7 +1,7 @@
 import { useCities } from '../../hooks/useCities'
 import { useCityMutations } from '../../hooks/useCityMutations'
-import { CityListItem } from './CityListItem'
 import styles from './CityList.module.css'
+import { CityListItem } from './CityListItem'
 
 export const CityList = () => {
   const { data: cities, isLoading, isError, error } = useCities()

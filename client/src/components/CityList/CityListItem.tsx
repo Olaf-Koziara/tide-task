@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import type { City } from '../../types/city.types'
 import styles from './CityList.module.css'
 
@@ -76,6 +77,14 @@ export const CityListItem = ({ city, onUpdate, onDelete, isUpdating, isDeleting 
             </span>
           </div>
           <div className={styles.cityList__actions}>
+            <Link
+              to={`/weather/${city.id}`}
+              state={{ latitude: city.latitude, longitude: city.longitude, name: city.name }}
+              className={`${styles.cityList__button} ${styles['cityList__button--weather']}`}
+              aria-label={`View weather for ${city.name}`}
+            >
+              🌤
+            </Link>
             <button
               type="button"
               className={`${styles.cityList__button} ${styles['cityList__button--edit']}`}

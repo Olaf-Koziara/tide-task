@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 
 import { searchCities } from '../services/externalCityService'
-import type { NormalizedSearchResult } from '../types/city.types'
+import type { NormalizedCitySearchResult } from '../types/city.types'
 
 const DEBOUNCE_MS = 300
 
@@ -16,7 +16,7 @@ export const useCitySearch = (query: string, minLength = 1) => {
 
   const trimmedQuery = debouncedQuery.trim()
 
-  return useQuery<NormalizedSearchResult[]>({
+  return useQuery<NormalizedCitySearchResult[]>({
     queryKey: ['city-search', trimmedQuery],
     queryFn: ({ signal }) => searchCities(trimmedQuery, signal),
     enabled: trimmedQuery.length >= minLength,

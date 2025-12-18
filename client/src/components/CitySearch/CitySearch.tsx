@@ -23,7 +23,11 @@ const CitySearch = () => {
     if (!city.cityName) return
 
     createCity.mutate(
-      { name: city.cityName },
+      { 
+        name: city.cityName,
+        latitude: city.lat,
+        longitude: city.lon
+      },
       {
         onSuccess: () => {
           console.log(`✓ Added "${city.cityName}" to your list`)

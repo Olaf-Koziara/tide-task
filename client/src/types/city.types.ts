@@ -67,12 +67,16 @@ export type CitySearchResponse = {
 export type City = {
   id: number
   name: string
+  latitude: number
+  longitude: number
   createdAt: string
   updatedAt: string
 }
 
 export type CreateCityDto = {
   name: string
+  latitude: number
+  longitude: number
 }
 
 export type UpdateCityDto = {
