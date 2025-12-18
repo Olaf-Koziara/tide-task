@@ -1,6 +1,6 @@
-import type { WeatherData, WeatherForecastResponse } from '../types/weather.types'
+import type { WeatherData, WeatherForecastResponse } from '../types/weather.types';
 
-const WEATHER_API_BASE_URL = 'https://api.open-meteo.com/v1/forecast'
+const WEATHER_API_BASE_URL = import.meta.env.VITE_WEATHER_API_BASE_URL ??'https://api.open-meteo.com/v1/forecast';
 
 class WeatherApiError extends Error {
   constructor(message: string) {
@@ -64,5 +64,5 @@ export const weatherService = {
   },
 }
 
-export { WeatherApiError }
+export { WeatherApiError };
 
