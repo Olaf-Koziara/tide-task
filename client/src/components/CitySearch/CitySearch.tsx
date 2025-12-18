@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useCityMutations } from '../../hooks/useCityMutations'
 import { useCitySearch } from '../../hooks/useCitySearch'
+import { ApiError } from '../../services/cityService'
 import type { NormalizedCitySearchResult } from '../../types/city.types'
 import styles from './CitySearch.module.css'
 import { CitySearchResults } from './CitySearchResults'
@@ -10,6 +11,8 @@ const MIN_QUERY_LENGTH = 2
 
 export const CitySearch = () => {
   const [query, setQuery] = useState('')
+  const [lastAddedCity, setLastAddedCity] = useState<string | null>(null)
+  
   const {
     data,
     isLoading,
@@ -20,24 +23,45 @@ export const CitySearch = () => {
 
   const { createCity } = useCityMutations()
 
+  useEffect(() => {
+    if (createCity.isSuccess && lastAddedCity) {
+      const timer = setTimeout(() => {
+        createCity.reset()
+        setLastAddedCity(null)
+      }, 5000)
+      return () => clearTimeout(timer)
+    }
+  }, [createCity.isSuccess, lastAddedCity, createCity])
+
   const handleAddCity = (city: NormalizedCitySearchResult) => {
     if (!city.cityName) return
 
-    createCity.mutate(
-      { 
-        name: city.cityName,
-        latitude: city.lat,
-        longitude: city.lon
-      },
-      {
-        onSuccess: () => {
-          console.log(`✓ Added "${city.cityName}" to your list`)
-        },
-        onError: (error) => {
-          console.error('Failed to add city:', error)
-        },
-      }
-    )
+    setLastAddedCity(city.cityName)
+    createCity.mutate({ 
+      name: city.cityName,
+      latitude: city.lat,
+      longitude: city.lon
+    })
+  }
+
+  const getErrorMessage = () => {
+    if (!createCity.error || !lastAddedCity) return null
+
+    const error = createCity.error
+    const isDuplicateError = 
+      error instanceof ApiError && 
+      (error.status === 409 || 
+       (error.data as { error?: string })?.error === 'DUPLICATE_CITY')
+    
+    if (isDuplicateError) {
+      return `"${lastAddedCity}" is already in your list`
+    }
+    return `Failed to add "${lastAddedCity}". Please try again.`
+  }
+
+  const getSuccessMessage = () => {
+    if (!createCity.isSuccess || !lastAddedCity) return null
+    return `✓ Added "${lastAddedCity}" to your list`
   }
 
 
@@ -66,6 +90,20 @@ export const CitySearch = () => {
          
         </div>
       </form>
+
+     
+
+      {createCity.isSuccess && getSuccessMessage() && (
+        <div className={styles.citySearch__addSuccess}>
+          {getSuccessMessage()}
+        </div>
+      )}
+
+      {createCity.isError && getErrorMessage() && (
+        <div className={styles.citySearch__addError}>
+          {getErrorMessage()}
+        </div>
+      )}
 
       <CitySearchResults
         query={query}
