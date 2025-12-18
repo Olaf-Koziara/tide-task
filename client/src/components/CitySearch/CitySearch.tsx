@@ -30,7 +30,8 @@ const CitySearch = () => {
       }, 5000)
       return () => clearTimeout(timer)
     }
-  }, [createCity.isSuccess, lastAddedCity, createCity])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [createCity.isSuccess, lastAddedCity])
 
   const handleAddCity = (city: NormalizedCitySearchResult) => {
     if (!city.cityName) return
@@ -58,11 +59,8 @@ const CitySearch = () => {
     return `Failed to add "${lastAddedCity}". Please try again.`
   }
 
-  const getSuccessMessage = () => {
-    if (!createCity.isSuccess || !lastAddedCity) return null
-    return `✓ Added "${lastAddedCity}" to your list`
-  }
 
+  const errorMessage = getErrorMessage()
 
   return (
     <section className={styles.citySearch}>
@@ -91,15 +89,11 @@ const CitySearch = () => {
 
      
 
-      {createCity.isSuccess && getSuccessMessage() && (
-        <div className={styles.citySearch__addSuccess}>
-          {getSuccessMessage()}
-        </div>
-      )}
 
-      {createCity.isError && getErrorMessage() && (
+
+      {errorMessage && (
         <div className={styles.citySearch__addError}>
-          {getErrorMessage()}
+          {errorMessage}
         </div>
       )}
 
