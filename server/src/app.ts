@@ -1,13 +1,12 @@
 import express from "express";
-import { env } from "./config/env";
+import { errorHandler } from "./middleware/errorHandler";
+import { cityRoutes } from "./routes/cityRoutes";
 
 const app = express();
 
-app.get('/',(req,res)=>{
-    res.status(200);
-    res.json({message:'hello'});
+app.use(express.json());
+app.use(cityRoutes);
+app.use(errorHandler);
 
-})
-app.listen(env.PORT,()=>{
-    console.log(`App listening on port ${env.PORT}`);
-})
+export { app };
+
