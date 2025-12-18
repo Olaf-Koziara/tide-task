@@ -70,7 +70,10 @@ export const WeatherForecast = () => {
         <header className={styles.weatherModal__header}>
           <h2 className={styles.weatherModal__cityName}>{state.name}</h2>
           <p className={styles.weatherModal__subtitle}>
-            {state.latitude.toFixed(2)}°N, {state.longitude.toFixed(2)}°E
+            {Math.abs(state.latitude).toFixed(2)}°
+            {state.latitude >= 0 ? 'N' : 'S'},{' '}
+            {Math.abs(state.longitude).toFixed(2)}°
+            {state.longitude >= 0 ? 'E' : 'W'}
           </p>
         </header>
 
