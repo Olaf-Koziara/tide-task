@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import type { City } from '../../types/city.types'
 import styles from './CityList.module.css'
 
 type Props = {
   city: City
-  onUpdate: (id: number, name: string) => void
+  onUpdate: (id: number, name: string, latitude: number, longitude: number) => void
   onDelete: (id: number) => void
   isUpdating: boolean
   isDeleting: boolean
@@ -17,7 +18,7 @@ export const CityListItem = ({ city, onUpdate, onDelete, isUpdating, isDeleting 
   const handleSave = () => {
     const trimmed = editValue.trim()
     if (trimmed && trimmed !== city.name) {
-      onUpdate(city.id, trimmed)
+      onUpdate(city.id, trimmed, city.latitude, city.longitude)
     }
     setIsEditing(false)
   }
@@ -76,6 +77,14 @@ export const CityListItem = ({ city, onUpdate, onDelete, isUpdating, isDeleting 
             </span>
           </div>
           <div className={styles.cityList__actions}>
+            <Link
+              to={`/weather/${city.id}`}
+              state={{ latitude: city.latitude, longitude: city.longitude, name: city.name }}
+              className={`${styles.cityList__button} ${styles['cityList__button--weather']}`}
+              aria-label={`View weather for ${city.name}`}
+            >
+              🌤
+            </Link>
             <button
               type="button"
               className={`${styles.cityList__button} ${styles['cityList__button--edit']}`}

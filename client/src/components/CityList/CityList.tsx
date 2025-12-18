@@ -1,14 +1,14 @@
 import { useCities } from '../../hooks/useCities'
 import { useCityMutations } from '../../hooks/useCityMutations'
-import { CityListItem } from './CityListItem'
 import styles from './CityList.module.css'
+import { CityListItem } from './CityListItem'
 
 export const CityList = () => {
   const { data: cities, isLoading, isError, error } = useCities()
   const { updateCity, deleteCity } = useCityMutations()
 
-  const handleUpdate = (id: number, name: string) => {
-    updateCity.mutate({ id, data: { name } })
+  const handleUpdate = (id: number, name: string, latitude: number, longitude: number) => {
+    updateCity.mutate({ id, data: { name, latitude, longitude } })
   }
 
   const handleDelete = (id: number) => {
