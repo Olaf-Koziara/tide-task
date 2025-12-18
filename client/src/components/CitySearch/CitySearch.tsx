@@ -38,7 +38,8 @@ const CitySearch = () => {
       }, 500)
       return () => clearTimeout(timer)
     }
-  }, [createCity.isSuccess, lastAddedCity, createCity])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [createCity.isSuccess, lastAddedCity])
 
   const handleAddCity = (city: NormalizedCitySearchResult) => {
     if (!city.cityName) return
@@ -87,7 +88,7 @@ const CitySearch = () => {
   }
 
 
-
+  const errorMessage = getErrorMessage()
 
   return (
     <section className={styles.citySearch}>
@@ -121,24 +122,22 @@ const CitySearch = () => {
           </div>
         )}
 
-        {createCity.isError && getErrorMessage() && (
-          <div className={styles.citySearch__addError}>
-            {getErrorMessage()}
-          </div>
-        )}
 
-        {query.trim() && (
-          <div className={styles.citySearch__dropdown}>
-            <CitySearchResults
-              query={query}
-              results={data ?? []}
-              isLoading={isLoading || isFetching}
-              isError={isError}
-              errorMessage={error instanceof Error ? error.message : undefined}
-              onAddCity={handleAddCity}
-            />
-          </div>
-        )}
+
+      {errorMessage && (
+        <div className={styles.citySearch__addError}>
+          {errorMessage}
+        </div>
+      )}
+
+      <CitySearchResults
+        query={query}
+        results={data ?? []}
+        isLoading={isLoading || isFetching}
+        isError={isError}
+        errorMessage={error instanceof Error ? error.message : undefined}
+        onAddCity={handleAddCity}
+      />
       </div>
     </section>
   )
