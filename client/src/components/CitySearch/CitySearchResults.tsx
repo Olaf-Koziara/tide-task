@@ -37,7 +37,7 @@ const CitySearchResults = ({
     )
   }
 
-  if (!results.length) {
+  if (!results.length && trimmed.length>2) {
     return <p className={styles.citySearch__helper}>No results for "{trimmed}".</p>
   }
 
