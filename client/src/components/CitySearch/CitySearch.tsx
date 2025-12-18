@@ -1,12 +1,13 @@
 import { useState } from 'react'
 
+import { useCityMutations } from '../../hooks/useCityMutations'
 import { useCitySearch } from '../../hooks/useCitySearch'
+import type { NormalizedCitySearchResult } from '../../types/city.types'
 import styles from './CitySearch.module.css'
-import { CitySearchResults } from './CitySearchResults'
+import CitySearchResults from './CitySearchResults'
 
 const MIN_QUERY_LENGTH = 2
-
-export const CitySearch = () => {
+const CitySearch = () => {
   const [query, setQuery] = useState('')
   const {
     data,
@@ -14,8 +15,25 @@ export const CitySearch = () => {
     isFetching,
     isError,
     error,
-    
   } = useCitySearch(query, MIN_QUERY_LENGTH)
+
+  const { createCity } = useCityMutations()
+
+  const handleAddCity = (city: NormalizedCitySearchResult) => {
+    if (!city.cityName) return
+
+    createCity.mutate(
+      { name: city.cityName },
+      {
+        onSuccess: () => {
+          console.log(`✓ Added "${city.cityName}" to your list`)
+        },
+        onError: (error) => {
+          console.error('Failed to add city:', error)
+        },
+      }
+    )
+  }
 
 
   return (
@@ -49,6 +67,7 @@ export const CitySearch = () => {
         isLoading={isLoading || isFetching}
         isError={isError}
         errorMessage={error instanceof Error ? error.message : undefined}
+        onAddCity={handleAddCity}
       />
     </section>
   )

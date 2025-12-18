@@ -109,8 +109,10 @@
   border: 1px solid #1e293b;
   border-radius: 10px;
   display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
 .citySearch__result-title {
@@ -133,5 +135,30 @@
   border-radius: 999px;
   font-size: 0.8rem;
   text-transform: capitalize;
+}
+
+.citySearch__add-button {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  border: none;
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  color: #0b1324;
+  font-size: 1.25rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.citySearch__add-button:hover {
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.3);
+}
+
+.citySearch__add-button:active {
+  transform: translateY(1px) scale(0.95);
 }
 

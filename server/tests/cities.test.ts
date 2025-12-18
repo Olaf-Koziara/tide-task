@@ -10,6 +10,7 @@ process.env.DATABASE_URL = databaseUrl;
 process.env.PORT = process.env.PORT ?? "0";
 
 const { app } = require("../src/app");
+const { prisma: appPrisma } = require("../src/prisma");
 
 const prisma = new PrismaClient({ datasources: { db: { url: databaseUrl } } });
 
@@ -27,6 +28,7 @@ before(async () => {
 
 after(async () => {
     await prisma.$disconnect();
+    await appPrisma.$disconnect();
 });
 
 beforeEach(async () => {
