@@ -51,7 +51,7 @@ const CitySearch = () => {
       longitude: city.lon
     }, {
       onSuccess: () => {
-        setQuery('')
+        resetQuery();
         setValidationError(null)
       }
     })
@@ -70,6 +70,9 @@ const CitySearch = () => {
     } else {
       setValidationError(null)
     }
+  }
+  const resetQuery = ()=>{
+    setQuery('');
   }
 
   const getErrorMessage = () => {
@@ -112,7 +115,13 @@ const CitySearch = () => {
               autoComplete="off"
               onChange={(event) => handleQueryChange(event.target.value)}
             />
-           
+          {query.length>2&& <button 
+              type="button"
+              className={styles.citySearch__resetButton}
+              onClick={resetQuery}
+            >
+              ✕
+            </button>}
           </div>
         </form>
 
@@ -129,7 +138,8 @@ const CitySearch = () => {
           {errorMessage}
         </div>
       )}
-
+      {!errorMessage && !validationError && query.length>2 &&
+    <div className={styles.citySearch__dropdown}>
       <CitySearchResults
         query={query}
         results={data ?? []}
@@ -138,6 +148,8 @@ const CitySearch = () => {
         errorMessage={error instanceof Error ? error.message : undefined}
         onAddCity={handleAddCity}
       />
+      </div>
+}
       </div>
     </section>
   )

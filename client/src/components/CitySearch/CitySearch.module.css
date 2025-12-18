@@ -45,23 +45,30 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
-}
-
-.citySearch__input {
-  flex: 1;
   padding: 0.65rem 0.85rem;
   border-radius: 10px;
   border: 1px solid #1e293b;
   background: #0b1324;
-  color: #e2e8f0;
-  font-size: 1rem;
-  outline: none;
   transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
-.citySearch__input:focus {
+.citySearch__controls:focus-within {
   border-color: #38bdf8;
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+}
+
+.citySearch__input {
+  flex: 1;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #e2e8f0;
+  font-size: 1rem;
+  outline: none;
+}
+
+.citySearch__input::placeholder {
+  color: #64748b;
 }
 
 .citySearch__button {
@@ -82,6 +89,32 @@
 
 .citySearch__button:not(:disabled):active {
   transform: translateY(1px) scale(0.995);
+}
+
+.citySearch__resetButton {
+  padding: 0;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.citySearch__resetButton:hover {
+  
+  color: #e2e8f0;
+}
+
+.citySearch__resetButton:active {
+  transform: scale(0.95);
 }
 
 .citySearch__hint {
@@ -107,9 +140,9 @@
   background: rgba(251, 191, 36, 0.1);
   border: 1px solid rgba(251, 191, 36, 0.3);
   color: #fbbf24;
-  padding: 0.75rem 1rem;
+  padding: 0.15em 1rem;
   border-radius: 10px;
-  margin: 0.75rem 0;
+  margin: 0.25rem 0;
   font-size: 0.9rem;
   animation: slideIn 0.2s ease-out;
 }
@@ -168,7 +201,6 @@
   max-height: 400px;
   overflow-y: auto;
   background: #0b1324;
-  border: 1px solid #1e293b;
   border-radius: 10px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
@@ -283,13 +315,10 @@
   }
 
   .citySearch__controls {
-    flex-direction: column;
-    gap: 0.5rem;
+    padding: 0.6rem 0.75rem;
   }
 
   .citySearch__input {
-    width: 100%;
-    padding: 0.6rem 0.75rem;
     font-size: 0.95rem;
   }
 
@@ -297,6 +326,11 @@
     width: 100%;
     padding: 0.6rem 0.85rem;
     font-size: 0.95rem;
+  }
+
+  .citySearch__resetButton {
+    padding: 0.3rem 0.4rem;
+    font-size: 1rem;
   }
 
   .citySearch__hint {
