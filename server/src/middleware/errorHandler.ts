@@ -1,13 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 import { ZodError } from "zod";
+import { isNotFound } from "../utils/errors";
 
 type AppError = Error & { status?: number };
-
-const isNotFound = (error: unknown) =>
-    typeof error === "object" &&
-    error !== null &&
-    "code" in error &&
-    (error as { code?: unknown }).code === "P2025";
 
 export const errorHandler = (
     error: unknown,

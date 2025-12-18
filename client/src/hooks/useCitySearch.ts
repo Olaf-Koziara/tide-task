@@ -14,10 +14,12 @@ export const useCitySearch = (query: string, minLength = 1) => {
     return () => clearTimeout(handle)
   }, [query])
 
+  const trimmedQuery = debouncedQuery.trim()
+
   return useQuery<NormalizedCitySearchResult[]>({
-    queryKey: ['city-search', debouncedQuery],
-    queryFn: ({ signal }) => searchCities(debouncedQuery, signal),
-    enabled: debouncedQuery.trim().length >= minLength,
+    queryKey: ['city-search', trimmedQuery],
+    queryFn: ({ signal }) => searchCities(trimmedQuery, signal),
+    enabled: trimmedQuery.length >= minLength,
     staleTime: 5 * 60 * 1000,
     gcTime: 10 * 60 * 1000,
     refetchOnWindowFocus: false,

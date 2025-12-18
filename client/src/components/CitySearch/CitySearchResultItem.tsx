@@ -6,7 +6,7 @@ type Props = {
   onAdd?: (city: NormalizedCitySearchResult) => void
 }
 
-export const CitySearchResultItem = ({ city, onAdd }: Props) => {
+const CitySearchResultItem = ({ city, onAdd }: Props) => {
   return (
     <li className={styles['citySearch__result-item']}>
       <div className={styles['citySearch__result-title']}>{city.cityName}</div>

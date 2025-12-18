@@ -4,11 +4,10 @@ import { useCityMutations } from '../../hooks/useCityMutations'
 import { useCitySearch } from '../../hooks/useCitySearch'
 import type { NormalizedCitySearchResult } from '../../types/city.types'
 import styles from './CitySearch.module.css'
-import { CitySearchResults } from './CitySearchResults'
+import CitySearchResults from './CitySearchResults'
 
 const MIN_QUERY_LENGTH = 2
-
-export const CitySearch = () => {
+const CitySearch = () => {
   const [query, setQuery] = useState('')
   const {
     data,
@@ -61,7 +60,6 @@ export const CitySearch = () => {
             value={query}
             autoComplete="off"
             onChange={(event) => setQuery(event.target.value)}
-            minLength={MIN_QUERY_LENGTH}
           />
          
         </div>
