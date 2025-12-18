@@ -103,7 +103,7 @@ const CitySearch = () => {
        (error.data as { error?: string })?.error === 'DUPLICATE_CITY')
     
     if (isDuplicateError) {
-      return `"${lastAddedCity}" is already in your list`
+      return error.message
     }
     return `Failed to add "${lastAddedCity}". Please try again.`
   }

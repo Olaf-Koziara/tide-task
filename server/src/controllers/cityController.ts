@@ -42,12 +42,15 @@ export const getCity = async (req: Request, res: Response) => {
 export const createCity = async (req: Request, res: Response) => {
     const { name, latitude, longitude } = createCitySchema.parse(req.body ?? {});
     const existingCity = await prisma.city.findFirst({
-        where: { name: { equals: name } }
+        where: { 
+            latitude,
+            longitude
+        }
     });
     
     if (existingCity) {
         return res.status(409).json({ 
-            message: "City already exists",
+            message: `City ${name} already exists ${existingCity.name !==name ?'with name '+existingCity.name:''}`,
             error: "DUPLICATE_CITY" 
         });
     }
