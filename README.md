@@ -2,6 +2,9 @@
 
 A full-stack application for searching and tracking weather conditions across multiple cities. Built with a focus on type safety, responsive design, and efficient data fetching.
 
+## Live demo
+https://tide-task.onrender.com/
+
 ## Tech Stack
 
 **Frontend:** React 19, TypeScript, Vite, TanStack Query, Zod, CSS Modules.
