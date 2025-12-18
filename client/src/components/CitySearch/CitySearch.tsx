@@ -38,7 +38,6 @@ export const CitySearch = () => {
             value={query}
             autoComplete="off"
             onChange={(event) => setQuery(event.target.value)}
-            minLength={MIN_QUERY_LENGTH}
           />
          
         </div>
