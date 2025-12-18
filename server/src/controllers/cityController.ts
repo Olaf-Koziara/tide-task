@@ -11,7 +11,7 @@ const cityInputSchema = z.object({
 const parseId = (value: string) => {
     const id = Number(value);
     if (!Number.isInteger(id) || id <= 0) {
-        const error: AppError = new Error("INVALID_ID");
+        const error: AppError = new Error("Invalid city ID provided");
         error.status = 400;
         throw error;
     }
