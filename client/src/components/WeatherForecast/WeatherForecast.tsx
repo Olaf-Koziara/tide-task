@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useWeatherForecast } from '../../hooks/useWeatherForecast'
 import { HourlyForecastItem } from './HourlyForecastItem'
 import { WeatherCard } from './WeatherCard'
@@ -13,7 +13,6 @@ type LocationState = {
 
 export const WeatherForecast = () => {
   const navigate = useNavigate()
-  const { cityId } = useParams<{ cityId: string }>()
   const location = useLocation()
   const state = location.state as LocationState | null
 
