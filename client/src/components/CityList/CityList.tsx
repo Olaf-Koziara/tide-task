@@ -45,8 +45,10 @@ export const CityList = () => {
   }
 
   return (
+    
     <section className={styles.cityList}>
       <h2 className={styles.cityList__title}>Your Cities ({cities.length})</h2>
+      <div className={styles.cityList__wrapper}>
       <ul className={styles.cityList__items}>
         {cities.map((city) => (
           <CityListItem
@@ -59,7 +61,9 @@ export const CityList = () => {
           />
         ))}
       </ul>
+      </div>
     </section>
+
   )
 }
 

@@ -1,12 +1,17 @@
 .cityList {
   max-width: 720px;
+  width: 600px;
   background: #0f172a;
   color: #e2e8f0;
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35);
-}
 
+}
+.cityList__wrapper{
+  max-height: 60vh;
+  overflow-y: scroll;
+}
 .cityList__title {
   margin: 0 0 1rem;
   font-size: 1.5rem;
@@ -152,5 +157,79 @@
 .cityList__editActions {
   display: flex;
   gap: 0.5rem;
+}
+
+@media (max-width: 630px) {
+  .cityList {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .cityList__title {
+    font-size: 1.25rem;
+  }
+
+  .cityList__message,
+  .cityList__error {
+    font-size: 0.9rem;
+  }
+
+  .cityList__items {
+    gap: 0.5rem;
+  }
+
+  .cityList__item {
+    padding: 0.75rem 0.85rem;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .cityList__content {
+    gap: 0.2rem;
+  }
+
+  .cityList__name {
+    font-size: 0.95rem;
+  }
+
+  .cityList__date {
+    font-size: 0.75rem;
+  }
+
+  .cityList__actions {
+    gap: 0.5rem;
+    justify-content: stretch;
+  }
+
+  .cityList__button {
+    flex: 1;
+    width: auto;
+    height: 2.25rem;
+    font-size: 0.9rem;
+  }
+
+  .cityList__button--weather {
+    order: -1;
+  }
+
+  .cityList__editMode {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .cityList__input {
+    width: 100%;
+    padding: 0.5rem 0.7rem;
+    font-size: 0.95rem;
+  }
+
+  .cityList__editActions {
+    gap: 0.5rem;
+  }
+
+  .cityList__editActions .cityList__button {
+    flex: 1;
+  }
 }
 
