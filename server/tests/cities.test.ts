@@ -68,3 +68,34 @@ test("rejects invalid name", async () => {
     await request(app).post("/cities").send({ name: "" }).expect(400);
 });
 
+test("returns 404 when getting non-existent city", async () => {
+    await request(app).get("/cities/99999").expect(404);
+});
+
+test("returns 404 when updating non-existent city", async () => {
+    await request(app).patch("/cities/99999").send({ name: "Updated" }).expect(404);
+});
+
+test("returns 404 when deleting non-existent city", async () => {
+    await request(app).delete("/cities/99999").expect(404);
+});
+
+test("returns 400 for invalid ID format in get request", async () => {
+    await request(app).get("/cities/invalid").expect(400);
+    await request(app).get("/cities/0").expect(400);
+    await request(app).get("/cities/-1").expect(400);
+    await request(app).get("/cities/1.5").expect(400);
+});
+
+test("returns 400 for invalid ID format in update request", async () => {
+    await request(app).patch("/cities/invalid").send({ name: "Test" }).expect(400);
+    await request(app).patch("/cities/0").send({ name: "Test" }).expect(400);
+    await request(app).patch("/cities/-1").send({ name: "Test" }).expect(400);
+});
+
+test("returns 400 for invalid ID format in delete request", async () => {
+    await request(app).delete("/cities/invalid").expect(400);
+    await request(app).delete("/cities/0").expect(400);
+    await request(app).delete("/cities/-1").expect(400);
+});
+
