@@ -30,7 +30,7 @@ export const useCityMutations = () => {
 
       queryClient.setQueryData<City[]>(CITIES_QUERY_KEY, (old = []) =>
         old.map((city) =>
-          city.id === id ? { ...city, name: data.name, updatedAt: new Date().toISOString() } : city
+          city.id === id ? { ...city, ...data, updatedAt: new Date().toISOString() } : city
         )
       )
 
