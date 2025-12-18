@@ -41,6 +41,16 @@ const CitySearch = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createCity.isSuccess, lastAddedCity])
 
+  useEffect(() => {
+    if (createCity.isError && lastAddedCity) {
+      const timer = setTimeout(() => {
+        createCity.reset()
+        setLastAddedCity(null)
+      }, 3000)
+      return () => clearTimeout(timer)
+    }
+  }, [createCity.isError, lastAddedCity,createCity])
+
   const handleAddCity = (city: NormalizedCitySearchResult) => {
     if (!city.cityName) return
 
@@ -60,6 +70,12 @@ const CitySearch = () => {
   const handleQueryChange = (value: string) => {
     setQuery(value)
     
+    // Clear error state when user starts typing
+    if (createCity.isError) {
+      createCity.reset()
+      setLastAddedCity(null)
+    }
+    
     if (value.length > 0) {
       const result = searchQuerySchema.safeParse({ query: value })
       if (!result.success) {
@@ -73,6 +89,8 @@ const CitySearch = () => {
   }
   const resetQuery = ()=>{
     setQuery('');
+    createCity.reset()
+    setLastAddedCity(null)
   }
 
   const getErrorMessage = () => {
