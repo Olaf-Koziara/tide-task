@@ -1,0 +1,151 @@
+.cityList {
+  margin: 2rem auto;
+  max-width: 720px;
+  background: #0f172a;
+  color: #e2e8f0;
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.35);
+}
+
+.cityList__title {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.cityList__message {
+  color: #cbd5e1;
+  margin: 0;
+}
+
+.cityList__error {
+  color: #f87171;
+  margin: 0;
+}
+
+.cityList__items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.cityList__item {
+  padding: 0.85rem 1rem;
+  background: #0b1324;
+  border: 1px solid #1e293b;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  transition: border-color 0.2s ease;
+}
+
+.cityList__item:hover {
+  border-color: #334155;
+}
+
+.cityList__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cityList__name {
+  font-weight: 700;
+  color: #e2e8f0;
+  font-size: 1rem;
+}
+
+.cityList__date {
+  font-size: 0.8rem;
+  color: #94a3b8;
+}
+
+.cityList__actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.cityList__button {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s ease, opacity 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cityList__button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cityList__button:not(:disabled):hover {
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+.cityList__button:not(:disabled):active {
+  transform: translateY(1px) scale(0.95);
+}
+
+.cityList__button--edit {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  color: #0b1324;
+}
+
+.cityList__button--delete {
+  background: linear-gradient(135deg, #f87171, #ef4444);
+  color: #fff;
+}
+
+.cityList__button--save {
+  background: linear-gradient(135deg, #34d399, #10b981);
+  color: #0b1324;
+}
+
+.cityList__button--cancel {
+  background: linear-gradient(135deg, #94a3b8, #64748b);
+  color: #fff;
+}
+
+/* Edit mode */
+.cityList__editMode {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.cityList__input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #38bdf8;
+  background: #0b1221;
+  color: #e2e8f0;
+  font-size: 1rem;
+  outline: none;
+  transition: box-shadow 0.2s ease;
+}
+
+.cityList__input:focus {
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.25);
+}
+
+.cityList__editActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
