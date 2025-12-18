@@ -51,12 +51,30 @@ export type CitySearchResult = {
   bbox?: [number, number, number, number] // [lon1, lat1, lon2, lat2]
 }
 
-export type NormalizedSearchResult = {
+export type NormalizedCitySearchResult = {
   placeId: string
   cityName?: string
+  lon: number
+  lat: number
 }
 
 export type CitySearchResponse = {
   type: 'FeatureCollection'
   features: CitySearchResult[]
+}
+
+// Backend API types
+export type City = {
+  id: number
+  name: string
+  createdAt: string
+  updatedAt: string
+}
+
+export type CreateCityDto = {
+  name: string
+}
+
+export type UpdateCityDto = {
+  name: string
 }

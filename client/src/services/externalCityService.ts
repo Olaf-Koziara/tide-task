@@ -1,19 +1,21 @@
-import type { CitySearchResponse, CitySearchResult, NormalizedSearchResult } from '../types/city.types';
+import type { CitySearchResponse, CitySearchResult, NormalizedCitySearchResult } from '../types/city.types';
 
 const BASE_URL = import.meta.env.VITE_SEARCH_BASE_ORIGIN;
 
 
 
 
-const normalizeCity = (cityResult: CitySearchResult): NormalizedSearchResult => ({
+const normalizeCity = (cityResult: CitySearchResult): NormalizedCitySearchResult => ({
   placeId: cityResult.properties.place_id ? String(cityResult.properties.place_id) : `${cityResult.properties.lat ?? ''}-${cityResult.properties.lon ?? ''}`,
-  cityName: cityResult.properties.city
+  cityName: cityResult.properties.city,
+  lon:cityResult.properties.lon,
+  lat:cityResult.properties.lat
 })
 
 export const searchCities = async (
   city: string,
   signal?: AbortSignal,
-): Promise<NormalizedSearchResult[]> => {
+): Promise<NormalizedCitySearchResult[]> => {
   const trimmed = city.trim()
   if (!trimmed) return []
 
