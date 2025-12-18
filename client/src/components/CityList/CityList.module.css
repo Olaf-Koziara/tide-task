@@ -10,7 +10,7 @@
 }
 .cityList__wrapper{
   max-height: 60vh;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 .cityList__title {
   margin: 0 0 1rem;
