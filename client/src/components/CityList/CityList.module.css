@@ -120,6 +120,12 @@
   color: #fff;
 }
 
+.cityList__button--weather {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: #0b1324;
+  text-decoration: none;
+}
+
 /* Edit mode */
 .cityList__editMode {
   flex: 1;
