@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { z } from 'zod'
 
 import { useCityMutations } from '../../hooks/useCityMutations'
 import { useCitySearch } from '../../hooks/useCitySearch'
@@ -7,10 +8,17 @@ import type { NormalizedCitySearchResult } from '../../types/city.types'
 import styles from './CitySearch.module.css'
 import CitySearchResults from './CitySearchResults'
 
-const MIN_QUERY_LENGTH = 2
+const MIN_QUERY_LENGTH = 3
+
+const searchQuerySchema = z.object({
+  query: z.string().min(MIN_QUERY_LENGTH, {
+    message: `Search query must be at least ${MIN_QUERY_LENGTH} characters`
+  })
+})
 const CitySearch = () => {
   const [query, setQuery] = useState('')
   const [lastAddedCity, setLastAddedCity] = useState<string | null>(null)
+  const [validationError, setValidationError] = useState<string | null>(null)
   
   const {
     data,
@@ -43,6 +51,21 @@ const CitySearch = () => {
     })
   }
 
+  const handleQueryChange = (value: string) => {
+    setQuery(value)
+    
+    if (value.length > 0) {
+      const result = searchQuerySchema.safeParse({ query: value })
+      if (!result.success) {
+        setValidationError(result.error.issues[0].message)
+      } else {
+        setValidationError(null)
+      }
+    } else {
+      setValidationError(null)
+    }
+  }
+
   const getErrorMessage = () => {
     if (!createCity.error || !lastAddedCity) return null
 
@@ -58,10 +81,7 @@ const CitySearch = () => {
     return `Failed to add "${lastAddedCity}". Please try again.`
   }
 
-  const getSuccessMessage = () => {
-    if (!createCity.isSuccess || !lastAddedCity) return null
-    return `✓ Added "${lastAddedCity}" to your list`
-  }
+
 
 
   return (
@@ -83,17 +103,15 @@ const CitySearch = () => {
             placeholder="e.g. Paris"
             value={query}
             autoComplete="off"
-            onChange={(event) => setQuery(event.target.value)}
+            onChange={(event) => handleQueryChange(event.target.value)}
           />
          
         </div>
       </form>
 
-     
-
-      {createCity.isSuccess && getSuccessMessage() && (
-        <div className={styles.citySearch__addSuccess}>
-          {getSuccessMessage()}
+      {validationError && (
+        <div className={styles.citySearch__validationError}>
+          {validationError}
         </div>
       )}
 

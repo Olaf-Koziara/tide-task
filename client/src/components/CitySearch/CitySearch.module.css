@@ -94,6 +94,17 @@
   margin: 0.5rem 0 0;
 }
 
+.citySearch__validationError {
+  background: rgba(251, 191, 36, 0.1);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  color: #fbbf24;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  margin: 0.75rem 0;
+  font-size: 0.9rem;
+  animation: slideIn 0.2s ease-out;
+}
+
 .citySearch__addError {
   background: rgba(248, 113, 113, 0.1);
   border: 1px solid rgba(248, 113, 113, 0.3);
