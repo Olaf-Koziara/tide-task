@@ -81,6 +81,4 @@ export type CreateCityDto = {
 
 export type UpdateCityDto = {
   name: string
-  latitude: number
-  longitude: number
 }

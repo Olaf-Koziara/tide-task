@@ -5,10 +5,14 @@ import { handlePrismaNotFound } from "../utils/errors";
 
 type AppError = Error & { status?: number };
 
-const cityInputSchema = z.object({
+const createCitySchema = z.object({
     name: z.string().trim().min(1),
     latitude: z.number().min(-90).max(90),
     longitude: z.number().min(-180).max(180)
+});
+
+const updateCitySchema = z.object({
+    name: z.string().trim().min(1)
 });
 
 const parseId = (value: string) => {
@@ -36,14 +40,14 @@ export const getCity = async (req: Request, res: Response) => {
 };
 
 export const createCity = async (req: Request, res: Response) => {
-    const { name, latitude, longitude } = cityInputSchema.parse(req.body ?? {});
+    const { name, latitude, longitude } = createCitySchema.parse(req.body ?? {});
     const city = await prisma.city.create({ data: { name, latitude, longitude } });
     res.status(201).json(city);
 };
 
 export const updateCity = async (req: Request, res: Response) => {
     const id = parseId(req.params.id);
-    const { name } = cityInputSchema.parse(req.body ?? {});
+    const { name } = updateCitySchema.parse(req.body ?? {});
     const city = await handlePrismaNotFound(res, () =>
         prisma.city.update({ where: { id }, data: { name } })
     );
