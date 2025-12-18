@@ -2,7 +2,7 @@ import { Route, Routes } from 'react-router-dom'
 import './App.css'
 
 import { CityList } from './components/CityList/CityList'
-import { CitySearch } from './components/CitySearch/CitySearch'
+import CitySearch from './components/CitySearch/CitySearch'
 import { WeatherForecast } from './components/WeatherForecast/WeatherForecast'
 
 function App() {

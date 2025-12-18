@@ -22,7 +22,7 @@ const CitySearchResults = ({
   const trimmed = query.trim()
 
   if (!trimmed) {
-    return <p className={styles.citySearch__helper}>Start typing to search for a city.</p>
+    return null
   }
 
   if (isLoading) {
@@ -37,7 +37,7 @@ const CitySearchResults = ({
     )
   }
 
-  if (!results.length) {
+  if (!results.length && trimmed.length>2) {
     return <p className={styles.citySearch__helper}>No results for "{trimmed}".</p>
   }
 
