@@ -35,7 +35,7 @@ const CitySearch = () => {
       const timer = setTimeout(() => {
         createCity.reset()
         setLastAddedCity(null)
-      }, 5000)
+      }, 500)
       return () => clearTimeout(timer)
     }
   }, [createCity.isSuccess, lastAddedCity, createCity])
@@ -48,6 +48,11 @@ const CitySearch = () => {
       name: city.cityName,
       latitude: city.lat,
       longitude: city.lon
+    }, {
+      onSuccess: () => {
+        setQuery('')
+        setValidationError(null)
+      }
     })
   }
 
@@ -91,44 +96,50 @@ const CitySearch = () => {
 
       </header>
 
-      <form className={styles.citySearch__form}>
-        <label className={styles.citySearch__label} htmlFor="city">
-          City name
-        </label>
-        <div className={styles.citySearch__controls}>
-          <input
-            id="city"
-            name="city"
-            className={styles.citySearch__input}
-            placeholder="e.g. Paris"
-            value={query}
-            autoComplete="off"
-            onChange={(event) => handleQueryChange(event.target.value)}
-          />
-         
-        </div>
-      </form>
+      <div className={styles.citySearch__searchContainer}>
+        <form className={styles.citySearch__form}>
+          <label className={styles.citySearch__label} htmlFor="city">
+            City name
+          </label>
+          <div className={styles.citySearch__controls}>
+            <input
+              id="city"
+              name="city"
+              className={styles.citySearch__input}
+              placeholder="e.g. Paris"
+              value={query}
+              autoComplete="off"
+              onChange={(event) => handleQueryChange(event.target.value)}
+            />
+           
+          </div>
+        </form>
 
-      {validationError && (
-        <div className={styles.citySearch__validationError}>
-          {validationError}
-        </div>
-      )}
+        {validationError && (
+          <div className={styles.citySearch__validationError}>
+            {validationError}
+          </div>
+        )}
 
-      {createCity.isError && getErrorMessage() && (
-        <div className={styles.citySearch__addError}>
-          {getErrorMessage()}
-        </div>
-      )}
+        {createCity.isError && getErrorMessage() && (
+          <div className={styles.citySearch__addError}>
+            {getErrorMessage()}
+          </div>
+        )}
 
-      <CitySearchResults
-        query={query}
-        results={data ?? []}
-        isLoading={isLoading || isFetching}
-        isError={isError}
-        errorMessage={error instanceof Error ? error.message : undefined}
-        onAddCity={handleAddCity}
-      />
+        {query.trim() && (
+          <div className={styles.citySearch__dropdown}>
+            <CitySearchResults
+              query={query}
+              results={data ?? []}
+              isLoading={isLoading || isFetching}
+              isError={isError}
+              errorMessage={error instanceof Error ? error.message : undefined}
+              onAddCity={handleAddCity}
+            />
+          </div>
+        )}
+      </div>
     </section>
   )
 }

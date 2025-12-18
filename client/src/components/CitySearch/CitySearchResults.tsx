@@ -22,7 +22,7 @@ const CitySearchResults = ({
   const trimmed = query.trim()
 
   if (!trimmed) {
-    return <p className={styles.citySearch__helper}>Start typing to search for a city.</p>
+    return null
   }
 
   if (isLoading) {
